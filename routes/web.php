@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('chirps', ChirpController::class)
-    ->only(['index', 'store', 'edit', 'update', 'destroy'])
-    ->middleware(['auth', 'verified']);
+
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::resource('chirps', ChirpController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('favorites', FavoriteController::class)->only(['index','update']);
+});
 require __DIR__ . '/auth.php';

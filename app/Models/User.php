@@ -48,4 +48,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Chirp::class);
     }
+    public function favorites()
+    {
+        return $this->belongsToMany(Chirp::class, 'favorites', 'user_id', 'chirp_id');
+    }
 }
