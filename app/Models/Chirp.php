@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Reply;
 use App\Events\ChirpCreated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,5 +28,10 @@ class Chirp extends Model
     public function favorites()
     {
         return $this->belongsToMany(User::class, 'favorites', 'chirp_id', 'user_id');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class, 'chirp_id');
     }
 }

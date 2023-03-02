@@ -45,8 +45,7 @@
                                 </x-dropdown>
                             @endif
                         </div>
-                        <p class="mt-4 text-lg text-gray-900">{{ $chirp->message }}</p>
-                        <x-favorite :chirp="$chirp"></x-favorite>
+                        <p class="mt-4 text-lg text-gray-900 break-all">{{ $chirp->message }}</p>
                     </div>
 
                 </div>

@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Chirp;
 use Laravel\Sanctum\HasApiTokens;
+use PhpParser\Node\Expr\Cast\Bool_;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -51,5 +53,14 @@ class User extends Authenticatable
     public function favorites()
     {
         return $this->belongsToMany(Chirp::class, 'favorites', 'user_id', 'chirp_id');
+    }
+
+    public function isOnline()
+    {
+        return Cache::has('user-online-' . $this->id);
+    }
+    public function replies()
+    {
+        return $this->hasMany(Reply::class, 'user_id');
     }
 }

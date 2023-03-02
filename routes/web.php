@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChirpController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FavoriteController;
 
@@ -34,5 +35,6 @@ Route::middleware('auth')->group(function () {
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('chirps', ChirpController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);
     Route::resource('favorites', FavoriteController::class)->only(['index','update']);
+    Route::resource('replies', ReplyController::class)->only(['index','store']);
 });
 require __DIR__ . '/auth.php';

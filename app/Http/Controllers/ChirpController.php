@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Chirp;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ class ChirpController extends Controller
     public function index(): View
     {
         return view('chirps.index', [
-            'chirps' => Chirp::with('user','favorites')->withCount('favorites')->latest()->get(),
+            'chirps' => Chirp::with('user', 'favorites', 'replies.user')->withCount('favorites')->latest()->get(),
+            'users' => User::where('id', '!=', request()->user()->id)->get()
         ]);
     }
 
