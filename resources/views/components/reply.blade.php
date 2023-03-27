@@ -12,6 +12,6 @@
         </button>
     </form>
     <span>
-        {{ $chirp->favorites_count }}
+        {{ $chirp->replies()->count() }}
     </span>
 </div>

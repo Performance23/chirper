@@ -32,6 +32,6 @@ class Chirp extends Model
 
     public function replies()
     {
-        return $this->hasMany(Reply::class, 'chirp_id');
+        return $this->hasMany(Reply::class, 'chirp_id')->latest();
     }
 }

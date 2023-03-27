@@ -49,11 +49,14 @@
         </div>
         <div x-data="{ openResponse: false }" @click.outside="openResponse = false" @close.stop="openResponse = false"
             class="mb-5">
-            <button @click="openResponse = !openResponse" class="bg-gray-900 text-white py-2 px-3 rounded-md  mb-5">
-                Repondre
-            </button>
+            <div class="flex justify-end">
+                <button @click="openResponse = !openResponse" class="bg-gray-900 text-white py-2 px-3 rounded-md  mb-5">
+                    Repondre
+                </button>
+            </div>
+
             <div class="flex flex-col items-end" x-show="openResponse">
-                <form method="POST" action="{{ route('replies.store') }}" class="w-11/12 mb-5">
+                <form method="POST" action="{{ route('replies.store') }}" class="w-11/12 mb-5 flex flex-col items-end">
                     @csrf
                     <textarea name="message" placeholder="{{ __('Reponse...') }}"
                         class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('message') }}</textarea>
